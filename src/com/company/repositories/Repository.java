@@ -197,4 +197,58 @@ public class Repository implements IRepository {
         }
         return false;
     }
+    
+    @Override
+    public ArrayList<Groups> showAllGroup() {
+        Connection con = null;
+        try {
+            con = dbManager.getConnection();
+            PreparedStatement st = con.prepareStatement("SELECT * FROM groups");
+            ResultSet resultSet = st.executeQuery();
+
+            ArrayList<Groups> groups = new ArrayList<>();
+
+            while(resultSet.next()) {
+                Groups group = new Groups(resultSet.getInt("g_id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("level"),
+                        resultSet.getInt("mentor_id"));
+                groups.add(group);
+            }
+            return groups;
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace();
+        } catch ( ClassNotFoundException e ) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<Mentors> showMentors() {
+        Connection con = null;
+        try {
+            con = dbManager.getConnection();
+            PreparedStatement st = con.prepareStatement("SELECT * FROM mentors");
+            ResultSet resultSet = st.executeQuery();
+
+            ArrayList<Mentors> mentors = new ArrayList<>();
+
+            while(resultSet.next()) {
+                Mentors m = new Mentors(resultSet.getInt("id"),
+                        resultSet.getString("fname"),
+                        resultSet.getString("lname"),
+                        resultSet.getInt("age"),
+                        resultSet.getString("email"),
+                        resultSet.getDouble("salary"));
+                mentors.add(m);
+            }
+            return mentors;
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace();
+        } catch ( ClassNotFoundException e ) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
