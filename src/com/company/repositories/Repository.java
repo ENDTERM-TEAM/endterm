@@ -40,4 +40,49 @@ public class Repository implements IRepository {
         }
         return false;
     }
+    
+    
+    @Override
+    public Students getStudentByHighestScore() {
+        Connection con = null;
+        try {
+            con = dbManager.getConnection();
+            PreparedStatement st = con.prepareStatement("SELECT * FROM students WHERE score=(SELECT MAX(score) FROM students)");
+            ResultSet resultSet = st.executeQuery();
+            Students students = new Students();
+
+            if(resultSet.next()) {
+                Students s = new Students(resultSet.getInt("id"),
+                        resultSet.getString("fname"),
+                        resultSet.getString("lname"),
+                        resultSet.getInt("age"),
+                        resultSet.getString("email"),
+                        resultSet.getInt("score"),
+                        resultSet.getInt("group_id"));
+                students = s;
+            }
+            return students;
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace();
+        } catch ( ClassNotFoundException e ) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean changeEmailById(int id, String email, String table) {
+        Connection con = null;
+        try {
+            con = dbManager.getConnection();
+            PreparedStatement st = con.prepareStatement("UPDATE " + table + " SET email='" + email + "' WHERE id=" + id + "");
+            st.execute();
+            return true;
+        } catch ( SQLException throwables ) {
+            throwables.printStackTrace();
+        } catch ( ClassNotFoundException e ) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
