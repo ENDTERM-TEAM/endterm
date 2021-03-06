@@ -14,16 +14,32 @@ public class MyApplication {
     }
 
     public void start() {
-        while (true) {
-            System.out.println("Choose one option:\n 1) Add new student \n " + "2) Study \n " + "0) Exit\n");
+         while (true) {
+            System.out.println("Choose one option:\n 1) Add new student \n " + "2) Add new teacher \n " + "3) Show all students \n " + "4) Remove student by id \n " + "5) Show Top 10 Students \n "+ "6) Get Student By Highest Score Menu \n " + "7) Change Email By Id Menu \n "+ "0) Exit\n");
             int choice = scanner.nextInt();
 
             if (choice == 1) {
                 addStudent();
             }
             else if(choice==2){
-
+                addTeacher();
+                }
+            else if(choice==3){
+                showAllStudents();
             }
+            else if(choice==4){
+               removeStudentById();
+            }
+            else if(choice==5){
+                showTop10Students();
+            }
+            else if(choice==6){
+                getStudentByHighestScoreMenu();
+            }
+            else if(choice==7){
+                changeEmailByIdMenu();
+            }
+
             else {
                 break;
             }
@@ -51,7 +67,41 @@ public class MyApplication {
 
         System.out.println(result);
     }
-    
+     public void addTeacher(){
+        System.out.println("Write Teacher's first name");
+        String first_name = scanner.next();
+        System.out.println("Write Teacher's last name");
+        String last_name = scanner.next();
+        System.out.println("Write Teacher's age!");
+        int age = scanner.nextInt();
+        System.out.println("Write Teacher email");
+        String email = scanner.next();
+        System.out.println("Write Teacher's group id");
+        int group_id = scanner.nextInt();
+        System.out.println("Write Teacher's salary");
+        Double salary = scanner.nextDouble();
+        System.out.println("Write Teacher's subject name");
+        String subject_name = scanner.next();
+        String result;
+        result = controller.addTeacher(first_name,last_name,age,email,group_id,salary,subject_name);
+
+        System.out.println(result);
+    }
+    public void showAllStudents() {
+        ArrayList<Students> result1 = controller.showAllStudents();
+        System.out.println("Students:");
+        System.out.println(result1);
+    }
+
+
+    public void removeStudentById() {
+        System.out.println("Write employee's id!");
+        int id = scanner.nextInt();
+
+        String result = String.valueOf(controller.removeStudentById(id));
+
+        System.out.println(result);
+    }
     public void getStudentByHighestScoreMenu() {
         System.out.println(centreController.getStudentByHighestScore());
     }
