@@ -44,11 +44,11 @@ public class Students extends Member implements IStudent {
 
     @Override
     public String test() {
-        return null;
+        return ", have passed the test with score " + score;
     }
 
     @Override
     public String toString() {
-        return super.toString() + ", score: " + score  + study() + group_id;
+        return super.toString() + ", score: " + score + test() + study() + group_id;
     }
 }
