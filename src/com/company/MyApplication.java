@@ -51,4 +51,18 @@ public class MyApplication {
 
         System.out.println(result);
     }
+    
+    public void getStudentByHighestScoreMenu() {
+        System.out.println(centreController.getStudentByHighestScore());
+    }
+
+    public void changeEmailByIdMenu() {
+        System.out.println("Please write where do you want to change email(students, mentors, teachers)");
+        String table = scanner.next();
+        System.out.println("Please write an id");
+        int id = scanner.nextInt();
+        System.out.println("Please write a new email");
+        String email = scanner.next();
+        System.out.println(centreController.changeEmailById(id,email,table));
+    }
 }
