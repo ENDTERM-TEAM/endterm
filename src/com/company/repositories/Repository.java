@@ -41,7 +41,119 @@ public class Repository implements IRepository {
         return false;
     }
     
-    
+    public boolean addTeacher(Teachers teachers) {
+        Connection con = null;
+        try {
+            con = dbManager.getConnection();
+            PreparedStatement st = con.prepareStatement("INSERT INTO teachers(id,fname,lname,age,email,group_id,salary,subject_name) VALUES(DEFAULT,?,?,?,?,?,?,?)");
+
+            st.setString(1, teachers.getFirst_name());
+            st.setString(2, teachers.getLast_name());
+            st.setInt(3, teachers.getAge());
+            st.setString(4,teachers.getEmail());
+            st.setInt(5, teachers.getGroup_id());
+            st.setDouble(6,teachers.getSalary());
+            st.setString(7,teachers.getSubject());
+            st.execute();
+            return true;
+        } catch ( SQLException | ClassNotFoundException throwables ) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public ArrayList showAllStudents() {
+
+
+        Connection con = null;
+
+        try {
+            con = dbManager.getConnection();
+
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM students");
+            ResultSet resultSet = ps.executeQuery();
+            ArrayList<Students> students = new ArrayList<>();
+            while (resultSet.next()) {
+               Students students1 = new Students(resultSet.getInt("id"),
+                        resultSet.getString("fname"),
+                        resultSet.getString("lname"),
+                        resultSet.getInt("age"),
+                        resultSet.getInt("score"),
+                        resultSet.getString("email"),
+                        resultSet.getInt("group_id"));
+
+                students.add(students1);
+            }
+            return students;
+
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+    @Override
+    public boolean removeStudentByID(int id) {
+
+        Connection con = null;
+
+        try {
+            con = dbManager.getConnection();
+
+            PreparedStatement ps = con.prepareStatement("DELETE FROM students WHERE id=?");
+
+            ps.setInt(1, id);
+
+            ps.execute();
+
+            return true;
+
+        } catch ( SQLException | ClassNotFoundException throwables ) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                assert con == null;
+                con.close();
+            } catch ( SQLException throwables ) {
+                throwables.printStackTrace();
+            }
+        }
+        return false;
+    }
+    @Override
+    public ArrayList showTop10Students() {
+
+
+        Connection con = null;
+
+        try {
+            con = dbManager.getConnection();
+
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM students ORDER BY score DESC ");
+            ResultSet resultSet = ps.executeQuery();
+            ArrayList<Students> students = new ArrayList<>();
+            int k = 0;
+
+            while (resultSet.next() && k<11) {
+                Students students1 = new Students(resultSet.getInt("id"),
+                        resultSet.getString("fname"),
+                        resultSet.getString("lname"),
+                        resultSet.getInt("age"),
+                        resultSet.getInt("score"),
+                        resultSet.getString("email"),
+                        resultSet.getInt("group_id"));
+                        k++;
+                students.add(students1);
+            }
+            return students;
+
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
     @Override
     public Students getStudentByHighestScore() {
         Connection con = null;
