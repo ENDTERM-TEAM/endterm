@@ -10,4 +10,6 @@ public interface IRepository {
     ArrayList showTop10Students();
     Students getStudentByHighestScore();
     boolean changeEmailById(int id, String email, String table);
+    ArrayList<Groups> showAllGroup();
+    ArrayList<Mentors> showMentors();
 }
