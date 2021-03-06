@@ -16,19 +16,23 @@ public class Mentors extends Member implements IWorker{
     public void setSalary(double salary) {
         this.salary = salary;
     }
-
+    
+    public double getSalary() {
+        return salary;
+    }
+    
     @Override
     public String work() {
         return ", is working as mentor";
     }
 
     @Override
-    public String getSalary() {
+    public String getSalaries() {
         return ", is salary="+salary;
     }
 
     @Override
     public String toString() {
-        return super.toString() + getSalary() + work() + "\n";
+        return super.toString() + getSalaries() + work() + "\n";
     }
 }
