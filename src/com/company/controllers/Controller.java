@@ -19,6 +19,43 @@ public class Controller {
         return "Student was not added";
     }
     
+    public String addTeacher(String first_name,String last_name,int age,String email,int group_id,double salary,String subject_name) {
+
+        Teachers teachers = new Teachers(first_name,last_name,age,email,group_id,salary,subject_name);
+        boolean added = repository.addTeacher(teachers);
+
+        if (added) {
+            return "Teacher was added!";
+        }
+
+        return "Teacher was not added!";
+
+    }
+
+    public ArrayList<Students> showAllStudents() {
+        ArrayList<Students> students = new ArrayList<>();
+        students = repository.showAllStudents();
+
+        return students;
+    }
+
+    public String removeStudentById(int id) {
+        boolean removed = repository.removeStudentByID(id);
+
+        if (removed) {
+            return "Employee was removed!";
+        }
+
+        return "Employee was not removed!";
+    }
+
+
+    public ArrayList<Students> showTop10Students() {
+        ArrayList<Students> students = new ArrayList<>();
+        students = repository.showTop10Students();
+
+        return students;
+    }
     public String getStudentByHighestScore() {
         return repository.getStudentByHighestScore().toString();
     }
