@@ -13,12 +13,30 @@ public class Teachers extends Member{
         super(id, first_name, last_name, age, email);
         this.group_id = group_id;
     }
-
+    
+    public double getSalary() {
+        return salary;
+    }
+    
     public int getGroup_id() {
         return group_id;
     }
 
     public void setGroup_id(int group_id) {
         this.group_id = group_id;
+    }
+
+    @Override
+    public String work() {
+        return ", is working as teacher";
+    }
+    @Override
+    public String getSalaries() {
+        return ", is salary="+salary;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + getSalaries() + work() + "\n";
     }
 }
