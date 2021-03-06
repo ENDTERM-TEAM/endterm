@@ -5,11 +5,11 @@ import com.company.controllers.Controller;
 import java.util.Scanner;
 
 public class MyApplication {
-    private final Controller centreController;
+    private final Controller controller;
     private final Scanner scanner;
 
-    public MyApplication(Controller centreController) {
-        this.centreController = centreController;
+    public MyApplication(Controller controller) {
+        this.controller = controller;
         scanner = new Scanner(System.in);
     }
 
@@ -63,7 +63,7 @@ public class MyApplication {
         int group_id = scanner.nextInt();
 
         String result;
-        result = centreController.addStudent(first_name,last_name,age,email,score,group_id);
+        result = controller.addStudent(first_name,last_name,age,email,score,group_id);
 
         System.out.println(result);
     }
@@ -113,6 +113,6 @@ public class MyApplication {
         int id = scanner.nextInt();
         System.out.println("Please write a new email");
         String email = scanner.next();
-        System.out.println(centreController.changeEmailById(id,email,table));
+        System.out.println(controller.changeEmailById(id,email,table));
     }
 }
