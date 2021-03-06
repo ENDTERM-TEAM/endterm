@@ -65,5 +65,16 @@ public class Controller {
         if(change) return "Email has updated";
         return "Email has not updated";
     }
+    
+    public void showAllGroups() {
+        ArrayList<Groups> groups = repository.showAllGroup();
+        ArrayList<Mentors> mentors = repository.showMentors();
+        for (Groups group : groups) {
+            System.out.println(group.toString());
+            for (Mentors mentor : mentors) {
+                if (group.getMentor_id() == mentor.getId()) System.out.println(mentor.toString());
+            }
+        }
+    }
 
 }
