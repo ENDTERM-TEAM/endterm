@@ -43,7 +43,7 @@ public class MyApplication {
                 changeEmailByIdMenu();
             }
             else if(choice==8){
-                showAllGroupsMenu()
+                showAllGroupsMenu();
             }
             else {
                 break;
