@@ -20,7 +20,7 @@ public class MyApplication {
          while (true) {
             System.out.println("Choose one option:\n 1) Add new student\n" + "2) Add new teacher\n" + "3) Show all students\n"
                     + "4) Remove student by id\n" + "5) Show top 10 students\n"+ "6) Get student by highest score\n"
-                    + "7) Change email by id menu\n"  + "8) Show all groups\n"+ "0) Exit\n");
+                    + "7) Change email by id\n"  + "8) Show all groups\n"+ "0) Exit\n");
             int choice = scanner.nextInt();
 
             if (choice == 1) {
