@@ -6,10 +6,10 @@ public class Groups {
     private String level;
     private int mentor_id;
 
-    public Groups () {}                                                    //empty constructure
+    public Groups () {}                                                    //empty constructor
 
     public Groups (int g_id, String name, String level, int mentor_id) {
-        setG_id(g_id);                                                     //constructure with his variables
+        setG_id(g_id);                                                     //constructor with his variables
         setName(name);
         setLevel(level);
         setMentor_id(mentor_id);
