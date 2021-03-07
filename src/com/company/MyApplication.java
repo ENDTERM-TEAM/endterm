@@ -18,9 +18,9 @@ public class MyApplication {
     public void start() {
          System.out.println("Welcome to Educational center 'Brainstorm'! ");
          while (true) {
-            System.out.println("Choose one option:\n 1) Add new student \n " + "2) Add new teacher \n " + "3) Show all students \n "
-                    + "4) Remove student by id \n " + "5) Show Top 10 Students \n "+ "6) Get Student By Highest Score \n "
-                    + "7) Change Email By Id \n "  + "8) Show all groups \n "+ "0) Exit\n");
+            System.out.println("Choose one option:\n 1) Add new student\n" + "2) Add new teacher\n" + "3) Show all students\n"
+                    + "4) Remove student by id\n" + "5) Show top 10 students\n"+ "6) Get student by highest score\n"
+                    + "7) Change email by id menu\n"  + "8) Show all groups\n"+ "0) Exit\n");
             int choice = scanner.nextInt();
 
             if (choice == 1) {
@@ -71,7 +71,7 @@ public class MyApplication {
         System.out.println("What package do you prefer? \n1) One subject \n2) Two subjects \n3) Three subjects \n4) Four subjects \n5) All subjects ");
         int subject_count=scanner.nextInt();
         System.out.println("Do you need the books? (Yes/No)");
-        boolean with_books = (scanner.next() == "Yes");
+        boolean with_books = (scanner.next().equals("Yes"));
             
         String result;
         result = controller.addStudent(first_name,last_name,age,score,email,group_id,subject_count,with_books);
