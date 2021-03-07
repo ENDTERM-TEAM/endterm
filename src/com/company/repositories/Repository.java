@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Repository implements IRepository {
+public class Repository implements IRepository {                                    
 
     private final IDBManager dbManager;
 
@@ -25,7 +25,7 @@ public class Repository implements IRepository {
     public boolean addStudent(Students student) {
         Connection con = null;
         try {
-            con = dbManager.getConnection();
+            con = dbManager.getConnection();                                           //
             PreparedStatement st = con.prepareStatement("INSERT INTO students(id,fname,lname,age,score,email,group_id,subject_count,with_books) VALUES(DEFAULT,?,?,?,?,?,?,?,?)");
 
             st.setString(1, student.getFirst_name());
@@ -67,13 +67,11 @@ public class Repository implements IRepository {
 
     @Override
     public ArrayList<Students> showAllStudents() {
-
-
         Connection con = null;
-
         try {
             con = dbManager.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM students");
+            
             ResultSet resultSet = ps.executeQuery();
             ArrayList<Students> students = new ArrayList<>();
             while (resultSet.next()) {
@@ -87,7 +85,6 @@ public class Repository implements IRepository {
                        resultSet.getInt("subject_count"),
                        resultSet.getBoolean("with_books"));
 
-
                 students.add(students1);
             }
             return students;
@@ -95,36 +92,29 @@ public class Repository implements IRepository {
         } catch ( SQLException | ClassNotFoundException throwables ) {
             throwables.printStackTrace();
         }
-
         return null;
     }
+    
     @Override
     public boolean removeStudentByID(int id) {
-
         Connection con = null;
-
         try {
             con = dbManager.getConnection();
 
             PreparedStatement ps = con.prepareStatement("DELETE FROM students WHERE id=?");
-
             ps.setInt(1, id);
-
             ps.execute();
-
             return true;
-
+            
         } catch ( SQLException | ClassNotFoundException throwables ) {
             throwables.printStackTrace();
         }
         return false;
     }
+    
     @Override
     public ArrayList<Students> showTop10Students() {
-
-
         Connection con = null;
-
         try {
             con = dbManager.getConnection();
 
@@ -143,18 +133,16 @@ public class Repository implements IRepository {
                         resultSet.getInt("group_id"),
                         resultSet.getInt("subject_count"),
                         resultSet.getBoolean("with_books"));
-
                 k++;
                 students.add(students1);
             }
             return students;
-
         } catch ( SQLException | ClassNotFoundException throwables ) {
             throwables.printStackTrace();
         }
-
         return null;
     }
+    
     @Override
     public Students getStudentByHighestScore() {
         Connection con = null;
