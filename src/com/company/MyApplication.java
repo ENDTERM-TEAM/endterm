@@ -52,8 +52,7 @@ public class MyApplication {
         }
     }
 
-   public void addStudent(){
-        
+   public void addStudent() {
         System.out.println("Write Student's first name");
         String first_name = scanner.next();
         System.out.println("Write Student's last name");
@@ -76,8 +75,7 @@ public class MyApplication {
         System.out.println(result);
     }
 
-    public void addTeacher(){
-        
+    public void addTeacher() {
         System.out.println("Write Teacher's first name");
         String first_name = scanner.next();
         System.out.println("Write Teacher's last name");
@@ -99,7 +97,6 @@ public class MyApplication {
     }
     
     public void showAllStudents() {
-        
         ArrayList<Students> result1 = controller.showAllStudents();
         System.out.println("Students:");
         System.out.println(result1);
