@@ -49,12 +49,12 @@ public class Teachers extends Member implements IWorker {
         return ", is working as teacher";
     }
     @Override
-    public String getSalaries() {
+    public String getSalaries() {                                              
         return ", is salary="+salary;
     }
 
     @Override
     public String toString() {
-        return super.toString() + getSalaries() + work() + "\n";
+        return super.toString() + getSalaries() + work() + "\n";                    //toString method to show all variables
     }
 }
