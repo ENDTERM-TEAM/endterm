@@ -1,16 +1,17 @@
 package com.company.entities;
 
 public class Member {
-    private int id;
-    private String first_name;
-    private String last_name;
-    private String email;
+    private int id;                                                                    //Super class for all members with id
+    private String first_name;                                                         //with his first name
+    private String last_name;                                                          //with last name
+    private String email;                                                              //with email and age
     private int age;
-
-    public Member(){
+    
+    //Constructors
+    public Member(){                                                                   //empty constructor
     }
 
-    public Member(int id,String first_name, String last_name, String email,int age) {
+    public Member(int id,String first_name, String last_name, String email,int age) {  //full constructor
         setId(id);
         setFirst_name(first_name);
         setLast_name(last_name);
@@ -18,13 +19,14 @@ public class Member {
         setAge(age);
     }
 
-    public Member(String first_name, String last_name, String email,int age) {
+    public Member(String first_name, String last_name, String email,int age) {         //constructor without id, in some tables id is serial
         setFirst_name(first_name);
         setLast_name(last_name);
         setEmail(email);
         setAge(age);
     }
-
+    
+    //Getters and setters od all variables
     public int getId() {
         return id;
     }
@@ -68,6 +70,6 @@ public class Member {
     @Override
     public String toString() {
         return getFirst_name() + ' ' + getLast_name() + " , id: " + id
-                + ", age: " + age + ", email: " + email;
+                + ", age: " + age + ", email: " + email;                                           //Method toString to show all variables
     }
 }
