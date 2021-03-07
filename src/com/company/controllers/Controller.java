@@ -13,10 +13,17 @@ public class Controller {
         this.repository = repository;
     }
 
-    public String addStudent(String first_name, String last_name, int age, String email, int score, int group_id) {
-        boolean add = repository.addStudent(new Students(first_name, last_name, age, email, score, group_id));
-        if (add) return "Student was added";
-        return "Student was not added";
+   public String addStudent(String first_name,String last_name,int age,int score,String email,int group_id,int subject_count,boolean with_books) {
+
+        Students students = new Students(first_name,last_name,age,score,email,group_id,subject_count,with_books);
+        boolean added = repository.addStudent(students);
+
+        if (added) {
+            return "Student was added!";
+        }
+
+        return "Student was not added!";
+
     }
     
     public String addTeacher(String first_name,String last_name,int age,String email,int group_id,double salary,String subject_name) {
@@ -39,14 +46,14 @@ public class Controller {
         return students;
     }
 
-    public String removeStudentById(int id) {
+     public String removeStudentById(int id) {
         boolean removed = repository.removeStudentByID(id);
 
         if (removed) {
-            return "Employee was removed!";
+            return "Student was removed!";
         }
 
-        return "Employee was not removed!";
+        return "Student was not removed!";
     }
 
 
