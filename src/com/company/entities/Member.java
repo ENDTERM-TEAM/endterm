@@ -4,25 +4,25 @@ public class Member {
     private int id;
     private String first_name;
     private String last_name;
-    private int age;
     private String email;
+    private int age;
 
-    public Member() {}
-
-    public Member(String first_name, String last_name, int age, String email) {
-        setId(id);
-        setFirst_name(first_name);
-        setLast_name(last_name);
-        setAge(age);
-        setEmail(email);
+    public Member(){
     }
 
-    public Member(int id, String first_name, String last_name, int age, String email) {
+    public Member(int id,String first_name, String last_name, String email,int age) {
         setId(id);
         setFirst_name(first_name);
         setLast_name(last_name);
-        setAge(age);
         setEmail(email);
+        setAge(age);
+    }
+
+    public Member(String first_name, String last_name, String email,int age) {
+        setFirst_name(first_name);
+        setLast_name(last_name);
+        setEmail(email);
+        setAge(age);
     }
 
     public int getId() {
@@ -31,6 +31,14 @@ public class Member {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getFirst_name() {
@@ -47,14 +55,6 @@ public class Member {
 
     public void setLast_name(String last_name) {
         this.last_name = last_name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public String getEmail() {
