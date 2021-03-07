@@ -1,7 +1,9 @@
 package com.company;
 
 import com.company.controllers.Controller;
+import com.company.entities.Students;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MyApplication {
