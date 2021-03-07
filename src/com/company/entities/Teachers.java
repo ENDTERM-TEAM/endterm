@@ -1,5 +1,6 @@
 package com.company.entities;
-import entities.interfaces.IWorker;
+
+import com.company.entities.interfaces.IWorker;
 
 public class Teachers extends Member implements IWorker {
     public double salary;
