@@ -86,5 +86,8 @@ public class Controller {
             }
         }
     }
-
+    public ArrayList<Teachers> showAllTeachers() {
+        ArrayList<Teachers> teachers = repository.showAllTeachers();           //navigation to method in repository
+        return teachers;
+    }
 }
