@@ -49,6 +49,6 @@ public class Students extends Member implements IStudent {
 
     @Override
     public String toString() {
-        return super.toString() + ", score: " + score + test() + study() + group_id;
+          return  " \n " + super.toString() + test() + study() + group_id;
     }
 }
