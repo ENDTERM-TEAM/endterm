@@ -1,20 +1,21 @@
 package com.company.entities;
 
 public class Groups {
-    private int g_id;
+    private int g_id;                                                      //class groups has id, his name as two subject, level and mentor's id
     private String name;
     private String level;
     private int mentor_id;
 
-    public Groups () {}
+    public Groups () {}                                                    //empty constructure
 
     public Groups (int g_id, String name, String level, int mentor_id) {
-        setG_id(g_id);
+        setG_id(g_id);                                                     //constructure with his variables
         setName(name);
         setLevel(level);
         setMentor_id(mentor_id);
     }
-
+    
+    //Getters and setters of all variables
     public int getG_id() {
         return g_id;
     }
@@ -49,6 +50,6 @@ public class Groups {
 
     @Override
     public String toString() {
-        return "Group " + getG_id() + ", with subject " + getName() + ", level is " + getLevel() + ", mentor: ";
+        return "Group " + getG_id() + ", with subject " + getName() + ", level is " + getLevel() + ", mentor: ";  //toString method to show all variables
     }
 }
