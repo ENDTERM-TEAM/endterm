@@ -18,29 +18,29 @@ public class Repository implements IRepository {
         this.dbManager = dbManager;
     }
 
-    @Override
+   @Override
     public boolean addStudent(Students student) {
         Connection con = null;
         try {
             con = dbManager.getConnection();
-            PreparedStatement st = con.prepareStatement("INSERT INTO students(id,fname,lname,age,score,email,group_id) VALUES(DEFAULT,?,?,?,?,?,?)");
+            PreparedStatement st = con.prepareStatement("INSERT INTO students(id,fname,lname,age,score,email,group_id,subject_count,with_books) VALUES(DEFAULT,?,?,?,?,?,?,?,?)");
 
             st.setString(1, student.getFirst_name());
             st.setString(2, student.getLast_name());
             st.setInt(3, student.getAge());
             st.setInt(4, student.getScore());
             st.setString(5, student.getEmail());
-            st.setInt(6,student.getGroup_id());
+            st.setInt(6,student.getGroupID());
+            st.setInt(7,student.getSubject_count());
+            st.setBoolean(8,student.isWith_books());
             st.execute();
             return true;
-        } catch ( SQLException throwables ) {
+        } catch ( SQLException | ClassNotFoundException throwables ) {
             throwables.printStackTrace();
-        } catch ( ClassNotFoundException e ) {
-            e.printStackTrace();
         }
         return false;
     }
-    
+
     public boolean addTeacher(Teachers teachers) {
         Connection con = null;
         try {
@@ -63,14 +63,13 @@ public class Repository implements IRepository {
     }
 
     @Override
-    public ArrayList showAllStudents() {
+    public ArrayList<Students> showAllStudents() {
 
 
         Connection con = null;
 
         try {
             con = dbManager.getConnection();
-
             PreparedStatement ps = con.prepareStatement("SELECT * FROM students");
             ResultSet resultSet = ps.executeQuery();
             ArrayList<Students> students = new ArrayList<>();
@@ -81,14 +80,17 @@ public class Repository implements IRepository {
                         resultSet.getInt("age"),
                         resultSet.getInt("score"),
                         resultSet.getString("email"),
-                        resultSet.getInt("group_id"));
+                        resultSet.getInt("group_id"),
+                       resultSet.getInt("subject_count"),
+                       resultSet.getBoolean("with_books"));
+
 
                 students.add(students1);
             }
             return students;
 
-        } catch ( Exception e ) {
-            e.printStackTrace();
+        } catch ( SQLException | ClassNotFoundException throwables ) {
+            throwables.printStackTrace();
         }
 
         return null;
@@ -111,18 +113,11 @@ public class Repository implements IRepository {
 
         } catch ( SQLException | ClassNotFoundException throwables ) {
             throwables.printStackTrace();
-        } finally {
-            try {
-                assert con == null;
-                con.close();
-            } catch ( SQLException throwables ) {
-                throwables.printStackTrace();
-            }
         }
         return false;
     }
     @Override
-    public ArrayList showTop10Students() {
+    public ArrayList<Students> showTop10Students() {
 
 
         Connection con = null;
@@ -142,14 +137,17 @@ public class Repository implements IRepository {
                         resultSet.getInt("age"),
                         resultSet.getInt("score"),
                         resultSet.getString("email"),
-                        resultSet.getInt("group_id"));
-                        k++;
+                        resultSet.getInt("group_id"),
+                        resultSet.getInt("subject_count"),
+                        resultSet.getBoolean("with_books"));
+
+                k++;
                 students.add(students1);
             }
             return students;
 
-        } catch ( Exception e ) {
-            e.printStackTrace();
+        } catch ( SQLException | ClassNotFoundException throwables ) {
+            throwables.printStackTrace();
         }
 
         return null;
@@ -168,16 +166,17 @@ public class Repository implements IRepository {
                         resultSet.getString("fname"),
                         resultSet.getString("lname"),
                         resultSet.getInt("age"),
-                        resultSet.getString("email"),
                         resultSet.getInt("score"),
-                        resultSet.getInt("group_id"));
+                        resultSet.getString("email"),
+                        resultSet.getInt("group_id"),
+                        resultSet.getInt("subject_count"),
+                        resultSet.getBoolean("with_books"));
+
                 students = s;
             }
             return students;
-        } catch ( SQLException throwables ) {
+        } catch ( SQLException | ClassNotFoundException throwables ) {
             throwables.printStackTrace();
-        } catch ( ClassNotFoundException e ) {
-            e.printStackTrace();
         }
         return null;
     }
@@ -190,14 +189,12 @@ public class Repository implements IRepository {
             PreparedStatement st = con.prepareStatement("UPDATE " + table + " SET email='" + email + "' WHERE id=" + id + "");
             st.execute();
             return true;
-        } catch ( SQLException throwables ) {
+        } catch ( SQLException | ClassNotFoundException throwables ) {
             throwables.printStackTrace();
-        } catch ( ClassNotFoundException e ) {
-            e.printStackTrace();
         }
         return false;
     }
-    
+
     @Override
     public ArrayList<Groups> showAllGroup() {
         Connection con = null;
@@ -216,10 +213,8 @@ public class Repository implements IRepository {
                 groups.add(group);
             }
             return groups;
-        } catch ( SQLException throwables ) {
+        } catch ( SQLException | ClassNotFoundException throwables ) {
             throwables.printStackTrace();
-        } catch ( ClassNotFoundException e ) {
-            e.printStackTrace();
         }
         return null;
     }
@@ -244,10 +239,8 @@ public class Repository implements IRepository {
                 mentors.add(m);
             }
             return mentors;
-        } catch ( SQLException throwables ) {
+        } catch ( SQLException | ClassNotFoundException throwables ) {
             throwables.printStackTrace();
-        } catch ( ClassNotFoundException e ) {
-            e.printStackTrace();
         }
         return null;
     }
