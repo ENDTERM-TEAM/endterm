@@ -15,7 +15,9 @@ public class MyApplication {
 
     public void start() {
          while (true) {
-            System.out.println("Choose one option:\n 1) Add new student \n " + "2) Add new teacher \n " + "3) Show all students \n " + "4) Remove student by id \n " + "5) Show Top 10 Students \n "+ "6) Get Student By Highest Score Menu \n " + "7) Change Email By Id Menu \n "+ "8) Show all groups with mentors" + "0) Exit\n");
+            System.out.println("Choose one option:\n 1) Add new student \n " + "2) Add new teacher \n " + "3) Show all students \n "
+                    + "4) Remove student by id \n " + "5) Show Top 10 Students \n "+ "6) Get Student By Highest Score Menu \n "
+                    + "7) Change Email By Id Menu \n "  + "8) Show all groups Menu \n "+ "0) Exit\n");
             int choice = scanner.nextInt();
 
             if (choice == 1) {
@@ -50,7 +52,8 @@ public class MyApplication {
         }
     }
 
-    public void addStudent(){
+   public void addStudent(){
+        
         System.out.println("Write Student's first name");
         String first_name = scanner.next();
         System.out.println("Write Student's last name");
@@ -63,13 +66,18 @@ public class MyApplication {
         String email = scanner.next();
         System.out.println("Write Student's group id");
         int group_id = scanner.nextInt();
-
+        System.out.println("What package do you prefer? \n1) One subject \n2) Two subjects \n3) Three subjects \n4) Four subjects \n5) All subjects ");
+        int subject_count=scanner.nextInt();
+        System.out.println("Do you need the books? (Yes/No)");
+        boolean with_books = (scanner.next() == "Yes");
+            
         String result;
-        result = controller.addStudent(first_name,last_name,age,email,score,group_id);
-
+        result = controller.addStudent(first_name,last_name,age,score,email,group_id,subject_count,with_books);
         System.out.println(result);
     }
-     public void addTeacher(){
+
+    public void addTeacher(){
+        
         System.out.println("Write Teacher's first name");
         String first_name = scanner.next();
         System.out.println("Write Teacher's last name");
@@ -84,28 +92,35 @@ public class MyApplication {
         Double salary = scanner.nextDouble();
         System.out.println("Write Teacher's subject name");
         String subject_name = scanner.next();
+        
         String result;
         result = controller.addTeacher(first_name,last_name,age,email,group_id,salary,subject_name);
-
         System.out.println(result);
     }
+    
     public void showAllStudents() {
+        
         ArrayList<Students> result1 = controller.showAllStudents();
         System.out.println("Students:");
         System.out.println(result1);
     }
-
-
+    
     public void removeStudentById() {
         System.out.println("Write employee's id!");
         int id = scanner.nextInt();
-
+        
         String result = String.valueOf(controller.removeStudentById(id));
-
         System.out.println(result);
     }
+    
+    public void showTop10Students() {
+        ArrayList<Students> result1 = controller.showTop10Students();
+        System.out.println("Top 10 students:");
+        System.out.println(result1);
+    }
+    
     public void getStudentByHighestScoreMenu() {
-        System.out.println(centreController.getStudentByHighestScore());
+        System.out.println(controller.getStudentByHighestScore());
     }
 
     public void changeEmailByIdMenu() {
