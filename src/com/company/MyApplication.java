@@ -18,9 +18,9 @@ public class MyApplication {
     public void start() {
          System.out.println("Welcome to Educational center 'Brainstorm'! ");
          while (true) {
-            System.out.println("Choose one option:\n 1) Add new student\n" + "2) Add new teacher\n" + "3) Show all students\n"
+            System.out.println("Choose one option:\n1) Add new student\n" + "2) Add new teacher\n" + "3) Show all students\n"
                     + "4) Remove student by id\n" + "5) Show top 10 students\n"+ "6) Get student by highest score\n"
-                    + "7) Change email by id\n"  + "8) Show all groups\n"+ "0) Exit\n");
+                    + "7) Change email by id menu\n"  + "8) Show all groups\n" + "9) Show all teachers\n" + "0) Exit\n");
             int choice = scanner.nextInt();
 
             if (choice == 1) {
@@ -47,6 +47,9 @@ public class MyApplication {
             else if(choice==8){
                 showAllGroupsMenu();
             }
+            else if (choice==9){
+                showAllTeachersMenu();
+            }
             else {
                 break;
             }
@@ -55,7 +58,7 @@ public class MyApplication {
         }
     }
 
-   public void addStudent() {
+    public void addStudent() {
         System.out.println("Write Student's first name");
         String first_name = scanner.next();
         System.out.println("Write Student's last name");
@@ -135,5 +138,9 @@ public class MyApplication {
     
     public void showAllGroupsMenu() {
         controller.showAllGroups();
+    }
+    
+    public void showAllTeachersMenu() {
+        System.out.println(controller.showAllTeachers());
     }
 }
