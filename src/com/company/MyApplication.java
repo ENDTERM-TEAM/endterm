@@ -19,8 +19,8 @@ public class MyApplication {
          System.out.println("Welcome to Educational center 'Brainstorm'! ");
          while (true) {
             System.out.println("Choose one option:\n 1) Add new student \n " + "2) Add new teacher \n " + "3) Show all students \n "
-                    + "4) Remove student by id \n " + "5) Show Top 10 Students \n "+ "6) Get Student By Highest Score Menu \n "
-                    + "7) Change Email By Id Menu \n "  + "8) Show all groups Menu \n "+ "0) Exit\n");
+                    + "4) Remove student by id \n " + "5) Show Top 10 Students \n "+ "6) Get Student By Highest Score \n "
+                    + "7) Change Email By Id \n "  + "8) Show all groups \n "+ "0) Exit\n");
             int choice = scanner.nextInt();
 
             if (choice == 1) {
