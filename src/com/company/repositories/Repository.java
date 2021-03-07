@@ -241,7 +241,7 @@ public class Repository implements IRepository {
         Connection con = null;
         try {
             con = dbManager.getConnection();                                        //get connection
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM students");  //the same as previous
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM teachers");  //the same as previous
             ResultSet resultSet = ps.executeQuery();
             ArrayList<Teachers> teachers = new ArrayList<>();                       //create array list
             while (resultSet.next()) {
