@@ -1,5 +1,7 @@
 package com.company.entities;
 
+import com.company.entities.interfaces.IWorker;
+
 public class Mentors extends Member implements IWorker{
     public double salary;
 
