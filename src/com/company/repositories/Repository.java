@@ -247,4 +247,30 @@ public class Repository implements IRepository {
         }
         return null;
     }
+    
+    @Override
+    public ArrayList<Teachers> showAllTeachers() {
+        Connection con = null;
+        try {
+            con = dbManager.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM students");
+            ResultSet resultSet = ps.executeQuery();
+            ArrayList<Teachers> teachers = new ArrayList<>();
+            while (resultSet.next()) {
+                Teachers t = new Teachers(resultSet.getInt("id"),
+                        resultSet.getString("fname"),
+                        resultSet.getString("lname"),
+                        resultSet.getInt("age"),
+                        resultSet.getString("email"),
+                        resultSet.getDouble("salary"),
+                        resultSet.getString("subject_name"),
+                        resultSet.getInt("group_id"));
+                teachers.add(t);
+            }
+            return teachers;
+        } catch ( SQLException | ClassNotFoundException throwables ) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
 }
