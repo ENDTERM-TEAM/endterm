@@ -5,6 +5,8 @@ import com.company.entities.Groups;
 import com.company.entities.Mentors;
 import com.company.entities.Students;
 import com.company.entities.Teachers;
+import java.util.ArrayList;
+
 public interface IRepository {
     boolean addStudent(Students students);
     boolean addTeacher(Teachers teachers);
@@ -15,4 +17,5 @@ public interface IRepository {
     boolean changeEmailById(int id, String email, String table);
     ArrayList<Groups> showAllGroup();
     ArrayList<Mentors> showMentors();
+    ArrayList<Teachers> showAllTeachers();
 }
