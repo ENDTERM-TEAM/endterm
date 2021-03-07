@@ -1,7 +1,10 @@
 package com.company.repositories;
 
 import com.company.data.interfaces.IDBManager;
+import com.company.entities.Groups;
+import com.company.entities.Mentors;
 import com.company.entities.Students;
+import com.company.entities.Teachers;
 import com.company.repositories.interfaces.IRepository;
 
 import java.sql.Connection;
