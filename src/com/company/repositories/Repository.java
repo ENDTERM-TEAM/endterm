@@ -2,7 +2,7 @@ package com.company.repositories;
 
 import com.company.data.interfaces.IDBManager;
 import com.company.entities.Groups;
-import com.company.entities.Mentors;
+import com.company.entities.Mentors;                                                   //Import all needed classes and statements
 import com.company.entities.Students;
 import com.company.entities.Teachers;
 import com.company.repositories.interfaces.IRepository;
@@ -18,17 +18,17 @@ public class Repository implements IRepository {
     private final IDBManager dbManager;
 
     public Repository(IDBManager dbManager) {
-        this.dbManager = dbManager;
+        this.dbManager = dbManager;                                                    //creating data base manager
     }
 
    @Override
     public boolean addStudent(Students student) {
-        Connection con = null;
+        Connection con = null;                                                         //create try catch block
         try {
-            con = dbManager.getConnection();                                           //
+            con = dbManager.getConnection();                                           //get coonect
             PreparedStatement st = con.prepareStatement("INSERT INTO students(id,fname,lname,age,score,email,group_id,subject_count,with_books) VALUES(DEFAULT,?,?,?,?,?,?,?,?)");
 
-            st.setString(1, student.getFirst_name());
+            st.setString(1, student.getFirst_name());                                  //For adding student write sql statement and fill instead question mark all variables of student
             st.setString(2, student.getLast_name());
             st.setInt(3, student.getAge());
             st.setInt(4, student.getScore());
@@ -37,11 +37,11 @@ public class Repository implements IRepository {
             st.setInt(7,student.getSubject_count());
             st.setBoolean(8,student.isWith_books());
             st.execute();
-            return true;
-        } catch ( SQLException | ClassNotFoundException throwables ) {
-            throwables.printStackTrace();
+            return true;                                                 
+        } catch ( SQLException | ClassNotFoundException throwables ) { 
+            throwables.printStackTrace();                                              //Catch block
         }
-        return false;
+        return false;                                                                  //if try block didn't work return false
     }
 
     public boolean addTeacher(Teachers teachers) {
@@ -50,7 +50,7 @@ public class Repository implements IRepository {
             con = dbManager.getConnection();
             PreparedStatement st = con.prepareStatement("INSERT INTO teachers(id,fname,lname,age,email,group_id,salary,subject_name) VALUES(DEFAULT,?,?,?,?,?,?,?)");
 
-            st.setString(1, teachers.getFirst_name());
+            st.setString(1, teachers.getFirst_name());                                 //the same as previous one but instead students, teachers
             st.setString(2, teachers.getLast_name());
             st.setInt(3, teachers.getAge());
             st.setString(4,teachers.getEmail());
@@ -60,7 +60,7 @@ public class Repository implements IRepository {
             st.execute();
             return true;
         } catch ( SQLException | ClassNotFoundException throwables ) {
-            throwables.printStackTrace();
+            throwables.printStackTrace();                                             //catch block
         }
         return false;
     }
@@ -70,12 +70,12 @@ public class Repository implements IRepository {
         Connection con = null;
         try {
             con = dbManager.getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM students");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM students");    //another sql statements to show all fields of table
             
-            ResultSet resultSet = ps.executeQuery();
-            ArrayList<Students> students = new ArrayList<>();
-            while (resultSet.next()) {
-               Students students1 = new Students(resultSet.getInt("id"),
+            ResultSet resultSet = ps.executeQuery();                                  //creating resultSet
+            ArrayList<Students> students = new ArrayList<>();                         //creating array list of students
+            while (resultSet.next()) {                                                //if result set has next fields
+               Students students1 = new Students(resultSet.getInt("id"),              //creating student and with help constructor filling it
                         resultSet.getString("fname"),
                         resultSet.getString("lname"),
                         resultSet.getInt("age"),
@@ -85,9 +85,9 @@ public class Repository implements IRepository {
                        resultSet.getInt("subject_count"),
                        resultSet.getBoolean("with_books"));
 
-                students.add(students1);
+                students.add(students1);                                               //adding each students
             }
-            return students;
+            return students;                                                           //return array list
 
         } catch ( SQLException | ClassNotFoundException throwables ) {
             throwables.printStackTrace();
@@ -99,17 +99,17 @@ public class Repository implements IRepository {
     public boolean removeStudentByID(int id) {
         Connection con = null;
         try {
-            con = dbManager.getConnection();
+            con = dbManager.getConnection();                                           //get connection
 
-            PreparedStatement ps = con.prepareStatement("DELETE FROM students WHERE id=?");
-            ps.setInt(1, id);
+            PreparedStatement ps = con.prepareStatement("DELETE FROM students WHERE id=?");  //for remove student use this sql statement
+            ps.setInt(1, id);                                                                //instead question mark id
             ps.execute();
             return true;
             
         } catch ( SQLException | ClassNotFoundException throwables ) {
             throwables.printStackTrace();
         }
-        return false;
+        return false;                                                                        //if it didn't work return false
     }
     
     @Override
@@ -118,13 +118,13 @@ public class Repository implements IRepository {
         try {
             con = dbManager.getConnection();
 
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM students ORDER BY score DESC ");
-            ResultSet resultSet = ps.executeQuery();
-            ArrayList<Students> students = new ArrayList<>();
-            int k = 0;
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM students ORDER BY score DESC ");  //do the same as show all students but with decreasing score from higher yo lower
+            ResultSet resultSet = ps.executeQuery();                                                     //execute this query
+            ArrayList<Students> students = new ArrayList<>();                                            //create array list of students
+            int k = 0;                                                                                   //create variable
 
-            while (resultSet.next() && k<11) {
-                Students students1 = new Students(resultSet.getInt("id"),
+            while (resultSet.next() && k<11) {                                                           //if resultset have next list and k is less than 11 continue this loop
+                Students students1 = new Students(resultSet.getInt("id"),                                //creating students
                         resultSet.getString("fname"),
                         resultSet.getString("lname"),
                         resultSet.getInt("age"),
@@ -133,8 +133,8 @@ public class Repository implements IRepository {
                         resultSet.getInt("group_id"),
                         resultSet.getInt("subject_count"),
                         resultSet.getBoolean("with_books"));
-                k++;
-                students.add(students1);
+                k++;                                                                                      //k from 0 to 10
+                students.add(students1);                                                                  //add student to list
             }
             return students;
         } catch ( SQLException | ClassNotFoundException throwables ) {
@@ -148,11 +148,11 @@ public class Repository implements IRepository {
         Connection con = null;
         try {
             con = dbManager.getConnection();
-            PreparedStatement st = con.prepareStatement("SELECT * FROM students WHERE score=(SELECT MAX(score) FROM students)");
+            PreparedStatement st = con.prepareStatement("SELECT * FROM students WHERE score=(SELECT MAX(score) FROM students)");  //statement to find student with highest score
             ResultSet resultSet = st.executeQuery();
-            Students students = new Students();
+            Students students = new Students();                                 //creating students and resultSet
 
-            if(resultSet.next()) {
+            if(resultSet.next()) {                                              //if is not null add student
                 Students s = new Students(resultSet.getInt("id"),
                         resultSet.getString("fname"),
                         resultSet.getString("lname"),
@@ -165,7 +165,7 @@ public class Repository implements IRepository {
 
                 students = s;
             }
-            return students;
+            return students;                                                     //return it
         } catch ( SQLException | ClassNotFoundException throwables ) {
             throwables.printStackTrace();
         }
@@ -176,9 +176,9 @@ public class Repository implements IRepository {
     public boolean changeEmailById(int id, String email, String table) {
         Connection con = null;
         try {
-            con = dbManager.getConnection();
-            PreparedStatement st = con.prepareStatement("UPDATE " + table + " SET email='" + email + "' WHERE id=" + id + "");
-            st.execute();
+            con = dbManager.getConnection();                                          //get connection
+            PreparedStatement st = con.prepareStatement("UPDATE " + table + " SET email='" + email + "' WHERE id=" + id + "");  //complex statement which can update email to 3 tables
+            st.execute();      //execute it and return true
             return true;
         } catch ( SQLException | ClassNotFoundException throwables ) {
             throwables.printStackTrace();
@@ -191,19 +191,19 @@ public class Repository implements IRepository {
         Connection con = null;
         try {
             con = dbManager.getConnection();
-            PreparedStatement st = con.prepareStatement("SELECT * FROM groups");
+            PreparedStatement st = con.prepareStatement("SELECT * FROM groups");  //the same as show all students 
             ResultSet resultSet = st.executeQuery();
 
-            ArrayList<Groups> groups = new ArrayList<>();
+            ArrayList<Groups> groups = new ArrayList<>();                 //create array list
 
             while(resultSet.next()) {
                 Groups group = new Groups(resultSet.getInt("g_id"),
-                        resultSet.getString("name"),
+                        resultSet.getString("name"),                      //fill each array list
                         resultSet.getString("level"),
                         resultSet.getInt("mentor_id"));
                 groups.add(group);
             }
-            return groups;
+            return groups;                                                //return it
         } catch ( SQLException | ClassNotFoundException throwables ) {
             throwables.printStackTrace();
         }
@@ -215,13 +215,13 @@ public class Repository implements IRepository {
         Connection con = null;
         try {
             con = dbManager.getConnection();
-            PreparedStatement st = con.prepareStatement("SELECT * FROM mentors");
+            PreparedStatement st = con.prepareStatement("SELECT * FROM mentors");   //the same as previous
             ResultSet resultSet = st.executeQuery();
 
-            ArrayList<Mentors> mentors = new ArrayList<>();
+            ArrayList<Mentors> mentors = new ArrayList<>();                         //create array list
 
             while(resultSet.next()) {
-                Mentors m = new Mentors(resultSet.getInt("id"),
+                Mentors m = new Mentors(resultSet.getInt("id"),                     //filling each
                         resultSet.getString("fname"),
                         resultSet.getString("lname"),
                         resultSet.getInt("age"),
@@ -229,7 +229,7 @@ public class Repository implements IRepository {
                         resultSet.getDouble("salary"));
                 mentors.add(m);
             }
-            return mentors;
+            return mentors;                                                         //return this array list
         } catch ( SQLException | ClassNotFoundException throwables ) {
             throwables.printStackTrace();
         }
@@ -240,12 +240,12 @@ public class Repository implements IRepository {
     public ArrayList<Teachers> showAllTeachers() {
         Connection con = null;
         try {
-            con = dbManager.getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM students");
+            con = dbManager.getConnection();                                        //get connection
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM students");  //the same as previous
             ResultSet resultSet = ps.executeQuery();
-            ArrayList<Teachers> teachers = new ArrayList<>();
+            ArrayList<Teachers> teachers = new ArrayList<>();                       //create array list
             while (resultSet.next()) {
-                Teachers t = new Teachers(resultSet.getInt("id"),
+                Teachers t = new Teachers(resultSet.getInt("id"),                   //filling it
                         resultSet.getString("fname"),
                         resultSet.getString("lname"),
                         resultSet.getInt("age"),
@@ -255,35 +255,7 @@ public class Repository implements IRepository {
                         resultSet.getInt("group_id"));
                 teachers.add(t);
             }
-            return teachers;
-        } catch ( SQLException | ClassNotFoundException throwables ) {
-            throwables.printStackTrace();
-        }
-        return null;
-    }
-    
-    @Override
-    public ArrayList<Teachers> showAllTeachers() {
-        Connection con = null;
-        try {
-            con = dbManager.getConnection();
-            PreparedStatement st = con.prepareStatement("SELECT * FROM teachers");
-            ResultSet resultSet = st.executeQuery();
-
-            ArrayList<Teachers> teacher = new ArrayList<>();
-
-            while(resultSet.next()) {
-                Teachers teachers= new Teachers(resultSet.getInt("id"),
-                        resultSet.getString("fname"),
-                        resultSet.getString("lname"),
-                        resultSet.getInt("age"),
-                        resultSet.getString("email"),
-                        resultSet.getInt("group_id"),
-                        resultSet.getDouble("salary"),
-                        resultSet.getString("subject_name"));
-                teacher.add(teachers);
-            }
-            return teacher;
+            return teachers;                                                        //return this array list
         } catch ( SQLException | ClassNotFoundException throwables ) {
             throwables.printStackTrace();
         }
