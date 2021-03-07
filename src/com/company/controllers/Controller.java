@@ -77,10 +77,10 @@ public class Controller {
     public void showAllGroups() {
         ArrayList<Groups> groups = repository.showAllGroup();                  //navigation to method in repository
         ArrayList<Mentors> mentors = repository.showMentors();                 //navigation to method in repository
-        for (Groups group : groups) {                                          //
-            System.out.println(group.toString());
-            for (Mentors mentor : mentors) {
-                if (group.getMentor_id() == mentor.getId()) System.out.println(mentor.toString());
+        for (Groups group : groups) {                                          //making for-each loop 
+            System.out.println(group.toString());                              //output each group
+            for (Mentors mentor : mentors) {                                   //making another for-each loop, find his mentors
+                if (group.getMentor_id() == mentor.getId()) System.out.println(mentor.toString());  //and outputting all info about them
             }
         }
     }
