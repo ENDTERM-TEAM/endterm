@@ -90,7 +90,7 @@ public class MyApplication {
         System.out.println("Write Teacher's group id");
         int group_id = scanner.nextInt();
         System.out.println("Write Teacher's salary");
-        Double salary = scanner.nextDouble();
+        double salary = scanner.nextDouble();
         System.out.println("Write Teacher's subject name");
         String subject_name = scanner.next();
         
